@@ -23,3 +23,36 @@ TODO 管理アプリ
     * Express でセッションを扱うためのパッケージ
 * sqlite3
     * Node で SQLite3 を扱うためのパッケージ
+
+
+## データベース設計
+
+### 利用者テーブル
+
+* id
+    * プライマリーキー
+* account
+    * アカウント名. メールアドレス等
+* password
+    * パスワード
+* name
+    * 名前
+* role
+    * 一般利用者(user)か管理者(admin)かを区別する
+
+### ToDo テーブル
+
+* id
+    * プライマリーキー
+* user_id
+    * ToDo を作成した利用者の id
+* title
+    * ToDo のタイトル
+* memo
+    * ToDo の内容
+* posted
+    * 投稿した日時
+* finished
+    * 終了する日時
+* checked
+    * 既に完了した ToDo かどうかを表す
