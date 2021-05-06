@@ -21,11 +21,14 @@ https://book.mynavi.jp/ec/products/detail/id=112778
 
 ## 使用 Node パッケージ
 
+* express-generator
+    * Express のプロジェクトを自動生成してくれるツール
+    * グローバル環境にインストールする
+        * $ npm install express-generator -g
 * express-session
     * Express でセッションを扱うためのパッケージ
 * sqlite3
     * Node で SQLite3 を扱うためのパッケージ
-
 
 ## データベース設計
 
@@ -64,3 +67,18 @@ https://book.mynavi.jp/ec/products/detail/id=112778
 
 1. `$ npm start` を実行しサーバを起動する
 1. ブラウザのアドレスバーに `http://localhost:3000` を入力しアクセス
+
+## express の使い方
+
+テンプレートエンジンに `ejs` を指定した場合の使用方法
+
+1. views フォルダの中に html のベースとなるテンプレートファイル(.ejs)を作成する
+1. routes フォルダの中に `.js` ファイルを作成しそこにクライアントからアクセスがあった場合の制御を書く
+    * router.get/routes.post で各 http メソッドの処理を定義する
+    * テンプレートを使ったレンダリングもここで行う
+        * `res.render('users' ,{...})` とすれば `users.ejs` をベースにレンダリングする
+    * router.get/router.post の引数で指定するパスはその router モジュールをルートとした相対パスで指定する
+        * ルートが `users` の場合に `/hoge` を引数に指定した場合は `http://localhost:3000/users/hoge` となる
+1. app.js に以下のコードを追記する
+    * `var xxxRouter = require('./routes/xxx');`
+    * `app.use('/xxx', xxxRouter);`
