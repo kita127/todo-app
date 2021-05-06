@@ -82,3 +82,17 @@ https://book.mynavi.jp/ec/products/detail/id=112778
 1. app.js に以下のコードを追記する
     * `var xxxRouter = require('./routes/xxx');`
     * `app.use('/xxx', xxxRouter);`
+
+### フォルダ構成
+
+* routes フォルダ
+    * ルーティングに関するスクリプトがまとめられている. このアドレスにアクセスしたらこの処理を実行するなど制御している
+* views フォルダ
+    * Web ページの元となるテンプレートをまとめる
+    * ejs は HTML がベースとなる
+* app.js
+    * Web アプリの本体となるスクリプト
+    * 外部パッケージの require
+    * ルーティングの追加
+    * etc
+
