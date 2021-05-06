@@ -2,7 +2,9 @@
 
 TODO 管理アプリ
 
-書籍「作りながら学ぶWebプログラミング実践入門」の課題
+書籍「作りながら学ぶWebプログラミング実践入門」の Chapter7 を作成したリポジトリ
+
+https://book.mynavi.jp/ec/products/detail/id=112778
 
 
 ## 使用技術
