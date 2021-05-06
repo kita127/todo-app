@@ -97,6 +97,9 @@ https://book.mynavi.jp/ec/products/detail/id=112778
     * 外部パッケージの require
     * ルーティングの追加
     * etc
+* node_modules
+    * プロジェクトが依存するパッケージ群
+    * `package.json` で管理されており、npm install でインストールできるためバージョン管理対象外でよい
 
 ## ユニットテスト
 
