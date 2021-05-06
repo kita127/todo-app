@@ -9,6 +9,7 @@ var dbdo = require('../db/exec.js');
 router.get('/', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     let sql = "select *,datetime(finished,'+9 hours') from todo where user_id="
         + req.session.login.id + ' and checked = 0 and finished > CURRENT_TIMESTAMP order by finished asc limit 10';
@@ -28,6 +29,7 @@ router.get('/', async function(req, res, next) {
 router.get('/add', function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     res.render('add', {
         title: 'Add ToDo',
@@ -50,6 +52,7 @@ router.post('/add', async function(req, res, next) {
 router.get('/view', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     let uid = req.session.login.id;
     let id = req.query.id;
@@ -67,6 +70,7 @@ router.get('/view', async function(req, res, next) {
 router.get('/complete', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     let uid = req.session.login.id;
     let id = req.query.id;
@@ -80,6 +84,7 @@ router.get('/complete', async function(req, res, next) {
 router.get('/user', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     let sql = "select *,datetime(finished,'+9 hours') from todo where user_id=" +
         req.session.login.id + ' order by finished asc';
@@ -95,6 +100,7 @@ router.get('/user', async function(req, res, next) {
 router.get('/del_todo', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
+        return;
     }
     let id = req.query.id;
     let uid = req.session.login.id;
