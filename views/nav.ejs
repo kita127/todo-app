@@ -1,3 +1,11 @@
+<script>
+function confirm_logout(){
+    var result = window.confirm("logout しますか");
+    if (result){
+        window.location = '/users/login';
+    }
+}
+</script>
 <nav class="navbar navbar-expand-sm navbar-dark bg-secondary">
     <ul class="navbar-nav">
         <li class="nav-item active">
@@ -13,7 +21,9 @@
             <a class="nav-link" href="/users/login">login</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="/users/logout">logout</a>
+            <a class="nav-link" href="javascript:confirm_logout();">
+                logout
+            </a>
         </li>
         <% if(login != undefined && login.role == 'admin'){ %>
         <li class="nav-item active">
