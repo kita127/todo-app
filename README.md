@@ -27,8 +27,10 @@ https://book.mynavi.jp/ec/products/detail/id=112778
         * $ npm install express-generator -g
 * express-session
     * Express でセッションを扱うためのパッケージ
+    * $ npm install --save express-session
 * sqlite3
     * Node で SQLite3 を扱うためのパッケージ
+    * $ npm install --save sqlite3
 
 ## データベース設計
 
@@ -95,4 +97,23 @@ https://book.mynavi.jp/ec/products/detail/id=112778
     * 外部パッケージの require
     * ルーティングの追加
     * etc
+
+## ユニットテスト
+
+### 導入
+
+Mocha というユニットテスト用のフレームワークを使用する
+
+    # mocha をインストール
+    $ npm install mocha --save-dev
+
+    # プロジェクト直下の test ディレクトリ内にある .js ファイルを対象に mocha はテストするためフォルダを作成する
+    $ mkdir test
+
+    # テストモジュール作成
+    $ touch ./test/test-sample.js
+
+### テスト実行
+
+    $ npx mocha
 
