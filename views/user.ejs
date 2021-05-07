@@ -14,6 +14,7 @@ function del(id){
         <th>ID</th>
         <th>Title</th>
         <th>Finished</th>
+        <th>Priority</th>
         <th>Completed?</th>
         <th>Delete</th>
     </tr>
@@ -22,6 +23,7 @@ function del(id){
             <td><%=data[i].id %></td>
             <td><%=data[i].title %></td>
             <td><%=data[i]["datetime(finished,'+9 hours')"] %></td>
+            <td><%=data[i].priority %></td>
             <td><%=data[i].checked ? 'YES' : '' %></td>
             <td><a href="javascript:del(<%=data[i].id %>);">DEL</a></td>
         </tr>

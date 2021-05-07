@@ -63,6 +63,10 @@ https://book.mynavi.jp/ec/products/detail/id=112778
     * 終了する日時
 * checked
     * 既に完了した ToDo かどうかを表す
+* priority
+    * タスクの優先度
+    * 1, 2, 3 の３段階
+    * 1 が最高優先度で 3 が最低優先度
 
 
 ## 実行
