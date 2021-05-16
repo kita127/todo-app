@@ -113,6 +113,7 @@ router.get('/user', async function(req, res, next) {
         login: req.session.login,
         data: records,
     });
+    */
 });
 
 /* Delete ToDo */
