@@ -57,12 +57,19 @@ router.post('/admin', async function(req, res, next) {
     let account = req.body.account;
     let pass = req.body.password;
     let name = req.body.name;
-    let sql = "insert into users (account, password, name, role) values('" + account + "','" + pass + "','" + name + "','user')";
-    await dbdo.exec(sql);
-    res.render('admin', {
-        title: 'Adimn',
-        login: req.session.login,
-    });
+
+    db.sequelize.sync().then(() => db.users.create({
+        account: account,
+        password: pass,
+        name: name,
+        role: 'user'
+    }))
+        .then(user => {
+            res.render('admin', {
+                title: 'Admin',
+                login: req.session.login,
+            })
+        });
 });
 
 /* Show User List */
