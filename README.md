@@ -138,3 +138,9 @@ sequelize は Node.js 用の OR マッパー
 sequelize を便利に使用するための CLI ツール
 
     $ npm install sequelize-cli
+
+### 手順
+
+1. sequelize を初期化する
+
+    $ npx sequelize-cli int
