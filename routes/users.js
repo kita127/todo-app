@@ -5,6 +5,7 @@ var dbget = require('../db/get.js');
 var dball = require('../db/all.js');
 var dbdo = require('../db/exec');
 
+const db = require('../models/index');
 
 
 /* Login page */
@@ -19,12 +20,18 @@ router.post('/login', async function(req, res, next) {
     let account = req.body.account;
     let pass = req.body.password;
 
-    let sql = "select * from users where account='" + account + "' and password='" + pass + "'";
-    let record = await dbget.getRow(sql);
-    if (record != undefined) {
-        req.session.login = record;
-    }
-    res.redirect('/');
+    db.users.findAll({
+        where: {
+            account: account,
+            password: pass
+        }
+    }).then(users => {
+        // その後の処理を書く
+        if (users.length == 1) {
+            req.session.login = users[0];
+        }
+        res.redirect('/');
+    });
 });
 
 /* Logout */
