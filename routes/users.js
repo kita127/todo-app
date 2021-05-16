@@ -80,12 +80,13 @@ router.get('/admin2', async function(req, res, next) {
     if (req.session.login.role != 'admin') {
         res.redirect('/users/login');
     }
-    let sql = "select * from users";
-    let records = await dball.getAllRows(sql);
-    res.render('admin2', {
-        title: 'Admin2',
-        login: req.session.login,
-        data: records,
+
+    db.users.findAll().then(users => {
+        res.render('admin2', {
+            title: 'Admin2',
+            login: req.session.login,
+            data: users
+        });
     });
 });
 
