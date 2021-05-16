@@ -91,17 +91,19 @@ router.get('/admin2', async function(req, res, next) {
 });
 
 /* Delete User */
-router.get('del_usr', async function(req, res, next) {
+router.get('/del_usr', async function(req, res, next) {
     if (req.session.login == undefined) {
         res.redirect('/users/login');
     }
     if (req.session.login.role != 'admin') {
         res.redirect('/users/login');
     }
-    let id = req.query.id;
-    let sql = 'delete from users where id=' + id;
-    await dbdo.exec(sql);
-    res.redirect('/users/admin2');
+
+    db.sequelize.sync().then(() => db.users.destroy({
+        where: { id: req.query.id }
+    })).then(user => {
+        res.redirect('/users/admin2');
+    });
 });
 
 
