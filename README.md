@@ -139,12 +139,89 @@ sequelize を便利に使用するための CLI ツール
 
     $ npm install sequelize-cli
 
-### 手順
+### DB 生成手順
 
-1. sequelize を初期化する
-    * $ npx sequelize-cli int
-1. 以下のフォルダが作成される
-    * config
-        * 設定情報管理
-    * models
-        * データベースアクセスに使う「モデル」というオブジェクトを定義する
+#### 1. sequelize を初期化する
+
+    $ npx sequelize-cli init
+
+#### 2. 以下のフォルダが作成される
+
+* config
+    * 設定情報管理
+* models
+    * データベースアクセスに使う「モデル」というオブジェクトを定義する
+
+#### 3. config.json に設定をする
+``` json
+{
+  "development": {
+    "database": "db-development",
+    "dialect": "sqlite",
+    "storage": "seq-todo.sqlite3"
+  },
+  "test": {
+    "database": "db-test",
+    "dialect": "sqlite",
+    "storage": "seq-todo.sqlite3"
+  },
+  "production": {
+    "database": "db-product",
+    "dialect": "sqlite",
+    "storage": "seq-todo.sqlite3"
+  }
+}
+```
+
+#### 4. モデルを作成する
+
+    $ npx sequelize-cli model:generate --name users --attributes account:string,password:string,name:string,role:string
+
+以下が生成される
+
+* models/users.js
+* migrations/yyyymmddxxxxxxxx-create-users.js
+
+#### 5. マイグレーションを実行する
+
+データベースの内容を変更した場合にその差分をデータベースに適用する.
+今回は新たにモデルを作成したため、その変更をデータベースに反映する.
+これによりモデルを作成した users テーブルが seq-todo.db に作成される.
+
+    $ npx sequelize-cli db:migrate --env development
+
+#### 6. シーディングによりレコードを作成する
+
+シーディング作成用のスクリプトファイルを生成する
+
+    $ npx sequelize-cli seed:generate --name sample-users
+
+seeders/yyyymmddxxxxxxxx-sample-users.js が生成されているためその `up` に生成するレコードの情報を記述する.
+
+``` javascript
+up: async (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert('users', [
+        {
+            account: 'admin.com',
+            password: 'admin',
+            name: 'admin',
+            role: 'admin',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        }
+    ]);
+    /**
+     * Add seed commands here.
+     *
+     * Example:
+     * await queryInterface.bulkInsert('People', [{
+     *   name: 'John Doe',
+     *   isBetaMember: false
+     * }], {});
+    */
+},
+```
+
+シーディングを実行する
+
+    $ npx sequelize-cli db:seed:all
