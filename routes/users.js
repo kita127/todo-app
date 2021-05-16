@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var dbget = require('../db/get.js');
-var dball = require('../db/all.js');
-var dbdo = require('../db/exec');
-
 const db = require('../models/index');
-
 
 /* Login page */
 router.get('/login', function(req, res, next) {
