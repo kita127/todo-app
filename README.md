@@ -142,5 +142,9 @@ sequelize を便利に使用するための CLI ツール
 ### 手順
 
 1. sequelize を初期化する
-
-    $ npx sequelize-cli int
+    * $ npx sequelize-cli int
+1. 以下のフォルダが作成される
+    * config
+        * 設定情報管理
+    * models
+        * データベースアクセスに使う「モデル」というオブジェクトを定義する
