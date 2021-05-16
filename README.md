@@ -124,3 +124,17 @@ Mocha というユニットテスト用のフレームワークを使用する
 
     $ npx mocha
 
+
+## sequelize
+
+sequelize は Node.js 用の OR マッパー
+
+### 導入
+
+    $  npm install sequelize
+
+### sequelize-cli の導入
+
+sequelize を便利に使用するための CLI ツール
+
+    $ npm install sequelize-cli
