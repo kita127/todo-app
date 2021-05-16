@@ -44,12 +44,27 @@ router.post('/add', async function(req, res, next) {
     let memo = req.body.memo;
     let finished = req.body.finished;
     let priority = req.body.priority;
+
+
+    db.sequelize.sync().then(() => db.todo.create({
+        user_id: uid,
+        title: title,
+        memo: memo,
+        finished: finished,
+        priority: priority
+    })).then(todo => {
+        console.log('add result=ok');
+        res.redirect('/');
+    });
+
+    /*
     let sql = "insert into todo (user_id,title,memo,finished,priority) values("
         + uid + ",'" + title + "','" + memo + "',datetime('" + finished
         + "','-9 hours')," + priority + ")";
     let result = await dbdo.exec(sql);
     console.log('add result=' + result);
     res.redirect('/');
+    */
 });
 
 /* View ToDo Detail */
