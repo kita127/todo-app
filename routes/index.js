@@ -5,6 +5,8 @@ var dbget = require('../db/get.js');
 var dball = require('../db/all.js');
 var dbdo = require('../db/exec.js');
 
+const db = require('../models/index');
+
 /* User Home */
 router.get('/', async function(req, res, next) {
     if (req.session.login == undefined) {
@@ -42,12 +44,27 @@ router.post('/add', async function(req, res, next) {
     let memo = req.body.memo;
     let finished = req.body.finished;
     let priority = req.body.priority;
+
+
+    db.sequelize.sync().then(() => db.todo.create({
+        user_id: uid,
+        title: title,
+        memo: memo,
+        finished: finished,
+        priority: priority
+    })).then(todo => {
+        console.log('add result=ok');
+        res.redirect('/');
+    });
+
+    /*
     let sql = "insert into todo (user_id,title,memo,finished,priority) values("
         + uid + ",'" + title + "','" + memo + "',datetime('" + finished
         + "','-9 hours')," + priority + ")";
     let result = await dbdo.exec(sql);
     console.log('add result=' + result);
     res.redirect('/');
+    */
 });
 
 /* View ToDo Detail */
@@ -88,6 +105,21 @@ router.get('/user', async function(req, res, next) {
         res.redirect('/users/login');
         return;
     }
+
+    /* 日本日付と完了日の昇順には対応していない */
+    db.todo.findAll({
+        where: {
+            user_id: req.session.login.id
+        }
+    }).then(todos => {
+        res.render('user', {
+            title: 'User Home',
+            login: req.session.login,
+            data: todos,
+        });
+    });
+
+    /*
     let sql = "select *,datetime(finished,'+9 hours') from todo where user_id=" +
         req.session.login.id + ' order by finished asc';
     let records = await dball.getAllRows(sql);
@@ -96,6 +128,7 @@ router.get('/user', async function(req, res, next) {
         login: req.session.login,
         data: records,
     });
+    */
 });
 
 /* Delete ToDo */
